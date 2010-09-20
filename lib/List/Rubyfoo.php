@@ -50,7 +50,14 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
     );
 
     /**
-     * Constructor
+     * Constructor.
+     * alias => delegated
+     *
+     * <code>
+     * // Following is the same in meaning.
+     * $list = new List_Rubyfoo(array(1, 2, 3, 4, 5));
+     * $list = new List_Rubyfoo(1, 2, 3, 4, 5);
+     * </code>
      *
      * @param  array $list variable argument is also available.
      */
@@ -65,11 +72,12 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
     }
 
     /**
-     * Property overloading
+     * Property overloading.
      * Properties defined in self::$_overloadProps calls method.
      *
      * @param  string $key
      * @return mixed
+     * @see    self::$_overloadedProps
      */
     public function __get($key)
     {
@@ -81,11 +89,13 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
     }
 
     /**
-     * Method alias
+     * Method alias.
+     * Some methods have alias.
      *
      * @param  string $method name of called method
      * @param  array  $args   arguments
      * @return mixed
+     * @see    self::$_aliases
      */
     public function __call($method, $args)
     {
@@ -140,11 +150,27 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
         return join($glue, $this->_list);
     }
 
+    /**
+     * First element.
+     *
+     * <code>
+     * echo $list->first();
+     * echo $list->first; // Calling as property is also available.
+     * </code>
+     */
     public function first()
     {
         return $this->_list[0];
     }
 
+    /**
+     * Last element.
+     *
+     * <code>
+     * echo $list->last();
+     * echo $list->last; // Calling as property is also available.
+     * </code>
+     */
     public function last()
     {
         return $this->_list[count($this->_list) - 1];
@@ -182,6 +208,20 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
         return $list;
     }
 
+    /**
+     * Method as an internal iterator.
+     * If false is returned, it means the same as break.
+     *
+     * <code>
+     * $list->each(function ($val)
+     * {
+     *     echo $val;
+     * });
+     * </code>
+     *
+     * @param  callback $func
+     * @return List_Rubyfoo
+     */
     public function each($func)
     {
         foreach ($this as $val)
@@ -295,26 +335,57 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
 
     public function sort_by() {}
 
+
+    /**
+     * Rewinds the iterator.
+     *
+     * @return void
+     * @see    Iterator::rewind()
+     */
     public function rewind()
     {
         $this->_pointer = 0;
     }
 
+    /**
+     * Current element.
+     *
+     * @return mixed
+     * @see    Iterator::current()
+     */
     public function current()
     {
         return $this->_list[$this->key()];
     }
 
+    /**
+     * Pointer of the current element.
+     *
+     * @return int
+     * @see    Iterator::key()
+     */
     public function key()
     {
         return $this->_pointer;
     }
 
+    /**
+     * Whether iterator has current element or not.
+     *
+     * @return bool
+     * @see    Iterator::valid()
+     */
     public function valid()
     {
         return $this->key() < $this->count();
     }
 
+    /**
+     * Moves forward to next
+     *
+     * @return void
+     * @see    Iterator::next()
+     */
     public function next()
     {
         $this->_pointer++;

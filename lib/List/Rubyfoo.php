@@ -22,7 +22,7 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
       */
     protected $_pointer;
 
-	/**
+    /**
      * Overloaded properties definition
      * property => method
      *

@@ -327,14 +327,30 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
         return false;
     }
 
+    /**
+     * Sorts elements.
+     * It's non-destructive.
+     *
+     * @return List_Rubyfoo
+     */
     public function sort()
+    {
+        return $this->_clone()->sort_();
+    }
+
+    /**
+     * Sorts elements.
+     * It's destructive.
+     *
+     * @return List_Rubyfoo
+     */
+    public function sort_()
     {
         sort($this->_list);
         return $this;
     }
 
     public function sort_by() {}
-
 
     /**
      * Rewinds the iterator.
@@ -408,4 +424,14 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
     public function offsetExists($key) {}
 
     public function offsetUnset($key) {}
+
+    /**
+     * Creates clone of the object itself.
+     *
+     * @return List_Rubyfoo
+     */
+    protected function _clone()
+    {
+        return clone $this;
+    }
 }

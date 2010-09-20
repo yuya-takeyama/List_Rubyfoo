@@ -225,7 +225,18 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
     public function testSort()
     {
         $unsorted = new List_Rubyfoo(5, 1, 4, 2, 3);
-        $this->assertEquals($this->_list, $unsorted->sort());
+        $sorted   = $unsorted->sort();
+        $this->assertEquals($this->_list, $sorted);
+        $this->assertNotSame($sorted, $unsorted);
+    }
+
+    public function testSort_()
+    {
+        $expected = clone $this->_list;
+        $unsorted = new List_Rubyfoo(5, 1, 4, 2, 3);
+        $actual   = $unsorted->sort_();
+        $this->assertEquals($expected, $actual);
+        $this->assertSame($unsorted, $actual);
     }
 
     /**

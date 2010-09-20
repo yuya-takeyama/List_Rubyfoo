@@ -152,7 +152,7 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
 
     public function max()
     {
-        foreach ($this->to_a() as $val)
+        foreach ($this as $val)
         {
             if (empty($max) || $val > $max) {
                 $max = $val;
@@ -163,7 +163,7 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
 
     public function min()
     {
-        foreach ($this->to_a() as $val)
+        foreach ($this as $val)
         {
             if (empty($min) || $val < $min) {
                 $min = $val;
@@ -184,7 +184,7 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
 
     public function each($func)
     {
-        foreach ($this->_list as $val)
+        foreach ($this as $val)
         {
             if ($func($val) === false) {
                 break;
@@ -195,7 +195,7 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
 
     public function each_index($func)
     {
-        foreach ($this->to_a() as $key => $val)
+        foreach ($this as $key => $val)
         {
             if ($func($key) === false) {
                 break;
@@ -217,7 +217,7 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
     public function grep($func)
     {
         $result = new List_Rubyfoo;
-        foreach ($this->_list as $val)
+        foreach ($this as $val)
         {
             if ($func($val)) {
                 $result->push($val);
@@ -228,7 +228,7 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
 
     public function detect($func)
     {
-        foreach ($this->_list as $val)
+        foreach ($this as $val)
         {
             if ($func($val)) {
                 return $val;
@@ -239,7 +239,7 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
     public function select($func)
     {
         $result = new List_Rubyfoo;
-        foreach ($this->_list as $val)
+        foreach ($this as $val)
         {
             if ($func($val)) {
                 $result->push($val);
@@ -267,7 +267,7 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
 
     public function all($func)
     {
-        foreach ($this->_list as $val)
+        foreach ($this as $val)
         {
             if (!$func($val)) {
                 return false;
@@ -278,7 +278,7 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
 
     public function any($func)
     {
-        foreach ($this->_list as $val)
+        foreach ($this as $val)
         {
             if ($func($val)) {
                 return true;

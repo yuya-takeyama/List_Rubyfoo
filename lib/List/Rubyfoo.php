@@ -251,7 +251,16 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
 
     public function map($func)
     {
-        return new self(array_map($func, $this->_list));
+        return $this->_clone()->map_($func);
+    }
+
+    public function map_($func)
+    {
+        foreach ($this as $key => $val)
+        {
+            $this[$key] = $func($val);
+        }
+        return $this;
     }
 
     public function grep($func)

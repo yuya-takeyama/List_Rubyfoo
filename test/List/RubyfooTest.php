@@ -161,8 +161,11 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
 
     public function testMap_()
     {
-        $sorted = $this->_list->map_(function ($x) { return $x * $x; });
-        $this->assertSame($this->_list, $sorted);
+        $func    = function ($x) { return $x * $x; };
+        $sortedA = $this->_list->map_($func);
+        $sortedB = $this->_list->collect_($func);
+        $this->assertSame($this->_list, $sortedA);
+        $this->assertSame($this->_list, $sortedB);
     }
 
     public function testGrep()

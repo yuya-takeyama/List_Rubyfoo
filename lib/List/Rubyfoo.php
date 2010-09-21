@@ -44,9 +44,10 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
      * @var array
      */
     protected static $_aliases = array(
-        'collect'  => 'map',
-        'find'     => 'detect',
-        'find_all' => 'select'
+        'collect'   => 'map',
+        'collect_'  => 'map_',
+        'find'      => 'detect',
+        'find_all'  => 'select'
     );
 
     /**

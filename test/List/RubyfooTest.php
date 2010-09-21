@@ -153,8 +153,9 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
     public function testMap()
     {
         $expected = new List_Rubyfoo(1, 4, 9, 16, 25);
-        $this->assertEquals($expected, $this->_list->map(function ($x) { return $x * $x; }));
-        $this->assertEquals($expected, $this->_list->collect(function ($x) { return $x * $x; }));
+        $func     = function ($x) { return $x * $x; };
+        $this->assertEquals($expected, $this->_list->map($func));
+        $this->assertEquals($expected, $this->_list->collect($func));
     }
 
     public function testGrep()

@@ -388,7 +388,7 @@ class List_Rubyfoo implements SeekableIterator, ArrayAccess, Countable
      * Rewinds the iterator.
      *
      * @return void
-     * @see    Iterator::rewind()
+     * @see    SeekableIterator::rewind()
      */
     public function rewind()
     {
@@ -399,7 +399,7 @@ class List_Rubyfoo implements SeekableIterator, ArrayAccess, Countable
      * Current element.
      *
      * @return mixed
-     * @see    Iterator::current()
+     * @see    SeekableIterator::current()
      */
     public function current()
     {
@@ -410,7 +410,7 @@ class List_Rubyfoo implements SeekableIterator, ArrayAccess, Countable
      * Pointer of the current element.
      *
      * @return int
-     * @see    Iterator::key()
+     * @see    SeekableIterator::key()
      */
     public function key()
     {
@@ -421,7 +421,7 @@ class List_Rubyfoo implements SeekableIterator, ArrayAccess, Countable
      * Whether iterator has current element or not.
      *
      * @return bool
-     * @see    Iterator::valid()
+     * @see    SeekableIterator::valid()
      */
     public function valid()
     {
@@ -429,16 +429,23 @@ class List_Rubyfoo implements SeekableIterator, ArrayAccess, Countable
     }
 
     /**
-     * Moves forward to next
+     * Moves forward to next.
      *
      * @return void
-     * @see    Iterator::next()
+     * @see    SeekableIterator::next()
      */
     public function next()
     {
         $this->_pointer++;
     }
 
+    /**
+     * Moves pointer to the offset.
+     *
+     * @param  int  $offset
+     * @return void
+     * @see    SeekableIterator::seek()
+     */
     public function seek($offset)
     {
         $this->_pointer = $offset;

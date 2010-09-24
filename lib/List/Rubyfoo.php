@@ -461,6 +461,9 @@ class List_Rubyfoo implements SeekableIterator, ArrayAccess, Countable
 
     public function offsetSet($key, $val)
     {
+        if (is_null($key)) {
+            return $this->push($val);
+        }
         $this->_list[$key] = $val;
         return $this;
     }

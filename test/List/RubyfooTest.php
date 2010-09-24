@@ -32,6 +32,13 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->_list->push(6), 'push() adds an element on end of list.');
     }
 
+    public function testPushWithArrayAccess()
+    {
+        $expected = List_Rubyfoo::new_(1, 2, 3, 4, 5, 6);
+        $this->_list[] = 6;
+        $this->assertEquals($expected, $this->_list);
+    }
+
     public function testPop()
     {
         $this->assertEquals(5, $this->_list->pop(), 'pop() gets the last element.');

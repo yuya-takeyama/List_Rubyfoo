@@ -11,13 +11,14 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->_list = new List_Rubyfoo(1, 2, 3, 4, 5);
+        $this->_list = List_Rubyfoo::new_(1, 2, 3, 4, 5);
     }
 
     public function testNew_()
     {
         $expected = clone $this->_list;
         $this->assertEquals($expected, $this->_list->new_(1, 2, 3, 4, 5));
+        $this->assertEquals($expected, new List_Rubyfoo(1, 2, 3, 4, 5));
     }
 
     public function testNew_static()
@@ -27,7 +28,7 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
 
     public function testPush()
     {
-        $expected = new List_Rubyfoo(1, 2, 3, 4, 5, 6);
+        $expected = List_Rubyfoo::new_(1, 2, 3, 4, 5, 6);
         $this->assertEquals($expected, $this->_list->push(6), 'push() adds an element on end of list.');
     }
 
@@ -38,7 +39,7 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
 
     public function testPop2()
     {
-        $expected = new List_Rubyfoo(1, 2, 3, 4);
+        $expected = List_Rubyfoo::new_(1, 2, 3, 4);
         $this->_list->pop();
         $this->assertEquals($expected, $this->_list);
     }
@@ -50,14 +51,14 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
 
     public function testShift_2()
     {
-        $expected = new List_Rubyfoo(2, 3, 4, 5);
+        $expected = List_Rubyfoo::new_(2, 3, 4, 5);
         $this->_list->shift();
         $this->assertEquals($expected, $this->_list);
     }
 
     public function testUnshift()
     {
-        $expected = new List_Rubyfoo(0, 1, 2, 3, 4, 5);
+        $expected = List_Rubyfoo::new_(0, 1, 2, 3, 4, 5);
         $this->assertEquals($expected, $this->_list->unshift(0));
     }
 
@@ -92,7 +93,7 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
 
     public function testSlice()
     {
-        $expected = new List_Rubyfoo(2, 3);
+        $expected = List_Rubyfoo::new_(2, 3);
         $this->assertEquals($expected, $this->_list->slice(1, 2));
     }
 
@@ -152,7 +153,7 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
 
     public function testMap()
     {
-        $expected = new List_Rubyfoo(1, 4, 9, 16, 25);
+        $expected = List_Rubyfoo::new_(1, 4, 9, 16, 25);
         $func     = function ($x) { return $x * $x; };
         $this->assertEquals($expected->to_a(), $this->_list->map($func)->to_a());
         $this->assertEquals($expected->to_a(), $this->_list->collect($func)->to_a());
@@ -170,7 +171,7 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
 
     public function testGrep()
     {
-        $expected = new List_Rubyfoo(4, 5);
+        $expected = List_Rubyfoo::new_(4, 5);
         $this->assertEquals($expected, $this->_list->grep(function ($x) { return $x > 3; }));
     }
 
@@ -182,7 +183,7 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
 
     public function testSelect()
     {
-        $expected = new List_Rubyfoo(2, 4);
+        $expected = List_Rubyfoo::new_(2, 4);
         $this->assertEquals($expected, $this->_list->select(function ($x) { return $x % 2 === 0; }));
         $this->assertEquals($expected, $this->_list->find_all(function ($x) { return $x % 2 === 0; }));
     }
@@ -239,7 +240,7 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
 
     public function testSort()
     {
-        $unsorted = new List_Rubyfoo(5, 1, 4, 2, 3);
+        $unsorted = List_Rubyfoo::new_(5, 1, 4, 2, 3);
         $sorted   = $unsorted->sort();
         $this->assertEquals($this->_list, $sorted);
         $this->assertNotSame($sorted, $unsorted);
@@ -248,7 +249,7 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
     public function testSort_()
     {
         $expected = clone $this->_list;
-        $unsorted = new List_Rubyfoo(5, 1, 4, 2, 3);
+        $unsorted = List_Rubyfoo::new_(5, 1, 4, 2, 3);
         $actual   = $unsorted->sort_();
         $this->assertEquals($expected, $actual);
         $this->assertSame($unsorted, $actual);
@@ -313,7 +314,7 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
 
     public function testOffsetSet()
     {
-        $expected = new List_Rubyfoo(5, 2, 3, 4, 5);
+        $expected = List_Rubyfoo::new_(5, 2, 3, 4, 5);
         $this->_list[0] = 5;
         $this->assertEquals($expected, $this->_list);
     }

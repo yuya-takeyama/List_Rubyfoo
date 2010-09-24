@@ -6,7 +6,7 @@
  * @author Yuya Takeyama <sign.of.the.wolf.pentagram@gmail.com>
  */
 
-class List_Rubyfoo implements Iterator, ArrayAccess, Countable
+class List_Rubyfoo implements SeekableIterator, ArrayAccess, Countable
 {
     /**
      * Array storage
@@ -115,7 +115,9 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
      */
     public static function __set_state($params)
     {
-        return self::new_($params['_list']);
+        $list = self::new_($params['_list']);
+        $list->seek($params['_pointer']);
+        return $list;
     }
 
     public function new_($list = array())
@@ -435,6 +437,11 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
     public function next()
     {
         $this->_pointer++;
+    }
+
+    public function seek($offset)
+    {
+        $this->_pointer = $offset;
     }
 
     public function offsetGet($key)

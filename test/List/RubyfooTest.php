@@ -204,6 +204,14 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->_list, $clone);
     }
 
+    public function testDumpIteratorPointer()
+    {
+        $this->_list->next();
+        $dump = $this->_list->dump(true);
+        eval("\$clone = {$dump};");
+        $this->assertEquals($this->_list, $clone);
+    }
+
     public function testTo_a()
     {
         $this->assertEquals(array(1, 2, 3, 4, 5), $this->_list->to_a());

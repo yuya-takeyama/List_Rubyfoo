@@ -107,6 +107,17 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
         throw new BadMethodCallException("Undefined method '{$method}' is called.");
     }
 
+    /**
+     * Restores object from dump.
+     *
+     * @param  array
+     * @return List_Rubyfoo
+     */
+    public static function __set_state($params)
+    {
+        return self::new_($params['_list']);
+    }
+
     public function new_($list = array())
     {
         if (is_array($list)) {
@@ -308,7 +319,16 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
         return $this->reduce(function ($a, $b) { return $a + $b; });
     }
 
-    public function dump() {}
+    /**
+     * Creates a dump of the object.
+     *
+     * @param  bool   $out Whether outputs dump or not.
+     * @return string
+     */
+    public function dump($out = false)
+    {
+        return var_export($this, $out);
+    }
 
     public function to_a()
     {

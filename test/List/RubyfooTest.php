@@ -197,15 +197,11 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(15, $this->_list->sum());
     }
 
-    /**
-     * @todo Implement testDump().
-     */
     public function testDump()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $dump = $this->_list->dump(true);
+        eval("\$clone = {$dump};");
+        $this->assertEquals($this->_list, $clone);
     }
 
     public function testTo_a()

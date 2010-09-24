@@ -266,7 +266,7 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
 
     public function grep($func)
     {
-        $result = new List_Rubyfoo;
+        $result = $this->new_();
         foreach ($this as $val)
         {
             if ($func($val)) {
@@ -288,7 +288,7 @@ class List_Rubyfoo implements Iterator, ArrayAccess, Countable
 
     public function select($func)
     {
-        $result = new List_Rubyfoo;
+        $result = $this->new_();
         foreach ($this as $val)
         {
             if ($func($val)) {

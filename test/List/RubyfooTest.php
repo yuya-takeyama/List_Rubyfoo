@@ -260,10 +260,13 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
      */
     public function testSort_by()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete();
+        $expected = List_Rubyfoo::new_('z', 'cc', 'bbb', 'xxxx', 'aaaaa');
+        $sorted   = List_Rubyfoo::new_('aaaaa', 'cc', 'bbb', 'xxxx', 'z')->sort_by(function ($val)
+        {
+            return strlen($val);
+        });
+        $this->assertEquals($expected, $sorted);
     }
 
     public function testRewind()

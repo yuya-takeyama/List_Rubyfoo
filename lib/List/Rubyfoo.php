@@ -470,7 +470,10 @@ class List_Rubyfoo implements SeekableIterator, ArrayAccess, Countable
 
     public function offsetExists($key) {}
 
-    public function offsetUnset($key) {}
+    public function offsetUnset($offset)
+    {
+        unset($this->_list[$offset]);
+    }
 
     /**
      * Creates clone of the object itself.

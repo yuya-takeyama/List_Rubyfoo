@@ -345,9 +345,8 @@ class List_RubyfooTest extends PHPUnit_Framework_TestCase
      */
     public function testOffsetUnset()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $expected = List_Rubyfoo::new_(array(1 => 2, 2 => 3, 3 => 4, 4 => 5));
+        unset($this->_list[0]);
+        $this->assertEquals($expected, $this->_list);
     }
 }

@@ -1,1 +1,4 @@
 Array iterator like Ruby for PHP.
+
+Inspired by @naoya_ito's php-List_RubyLike.
+http://github.com/naoya/php-List_RubyLike
